@@ -1,0 +1,29 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="iconGrad" cx="89.6" cy="38.4" r="115.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5C77C6"/>
+      <stop offset="1" stop-color="#2A3A8C"/>
+    </radialGradient>
+    
+    <!-- 简化阴影，提高 Photoshop 兼容性 -->
+    <filter id="textShadowSimple" x="0" y="0" width="200%" height="200%">
+      <feOffset dx="0" dy="2" in="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 使用绝对坐标 64 替代 50% -->
+  <rect x="8" y="8" width="112" height="112" rx="24" fill="url(#iconGrad)"/>
+  
+  <!-- 将坐标从百分比改为具体数值，提高兼容性 -->
+  <text x="64" y="86" text-anchor="middle" fill="white" font-family="STHeiti, 'Microsoft YaHei', 'PingFang SC', sans-serif" font-weight="bold" font-size="72" filter="url(#textShadowSimple)">
+    読
+  </text>
+</svg>

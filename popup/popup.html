@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YomiMark</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo-row">
+        <img src="../icons/icon.svg" alt="YomiMark" class="logo-icon">
+        <div class="logo-text">
+          <h1>YomiMark</h1>
+          <span class="tagline">Instant Furigana</span>
+        </div>
+      </div>
+      <div class="toggle-wrapper">
+        <label class="toggle" for="enable-toggle">
+          <input type="checkbox" id="enable-toggle" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <div class="status-bar" id="status-bar">
+      <span class="status-dot"></span>
+      <span class="status-text" id="status-text">Ready</span>
+    </div>
+
+    <section class="how-to">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-text">Select Japanese text on any webpage</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-text">Click the <strong class="btn-preview">読</strong> button that appears</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-text">Furigana is added above kanji instantly</span>
+      </div>
+    </section>
+
+    <div class="demo-box">
+      <div class="demo-label">Example</div>
+      <div class="demo-before">情報処理を勉強しています。</div>
+      <div class="demo-arrow">↓</div>
+      <div class="demo-after">
+        <ruby>情報処理<rp>(</rp>
+          <rt>じょうほうしょり</rt>
+          <rp>)</rp>
+        </ruby>を<ruby>勉強<rp>(</rp>
+          <rt>べんきょう</rt>
+          <rp>)</rp>
+        </ruby>しています。
+      </div>
+    </div>
+
+    <footer class="popup-footer">
+      <span>v1.0.0</span>
+      <span>·</span>
+      <span>Toshiki Tech Lab</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>

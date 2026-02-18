@@ -1,0 +1,43 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 模仿图片中的径向渐变效果，高光在右上角 -->
+    <radialGradient id="iconGrad" cx="70%" cy="30%" r="90%" fx="70%" fy="30%">
+      <stop offset="0%" style="stop-color:#5c77c6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a3a8c;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- 文字阴影：轻微向下偏移，增加立体感 -->
+    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.2"/>
+      <feOffset dx="0" dy="1.5" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 整体容器阴影：模仿图片中的外阴影 -->
+    <filter id="containerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景圆角矩形，使用径向渐变和阴影 -->
+  <rect x="8" y="8" width="112" height="112" rx="24" fill="url(#iconGrad)" filter="url(#containerShadow)"/>
+  
+  <!-- 「読」字，白色，加深字重至 800 以匹配图片 -->
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Noto Sans JP, sans-serif" font-weight="800" font-size="72" filter="url(#textShadow)">
+    読
+  </text>
+</svg>

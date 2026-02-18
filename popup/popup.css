@@ -1,0 +1,236 @@
+/* ── Base Reset & Typography ──────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 320px;
+    font-family: "Inter", "Noto Sans JP", "Segoe UI", system-ui, sans-serif;
+    background: #0f0f14;
+    color: #e4e4eb;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Container ───────────────────────────────────────── */
+.popup-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.logo-text h1 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.tagline {
+    font-size: 10px;
+    color: #8b8b9e;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+}
+
+/* ── Toggle Switch ───────────────────────────────────── */
+.toggle-wrapper {
+    flex-shrink: 0;
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #2a2a3a;
+    border-radius: 24px;
+    transition: background 0.25s ease;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: #555;
+    border-radius: 50%;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.toggle input:checked+.toggle-slider {
+    background: linear-gradient(135deg, #2a3a8c, #5c77c6);
+}
+
+.toggle input:checked+.toggle-slider::before {
+    transform: translateX(18px);
+    background: #fff;
+}
+
+/* ── Status Bar ──────────────────────────────────────── */
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a1a24;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #2a2a3a;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4a62a8;
+    box-shadow: 0 0 6px rgba(74, 98, 168, 0.5);
+    flex-shrink: 0;
+}
+
+.status-bar.disabled .status-dot {
+    background: #666;
+    box-shadow: none;
+}
+
+.status-text {
+    font-size: 11px;
+    color: #a0a0b8;
+}
+
+/* ── How-To Steps ────────────────────────────────────── */
+.how-to {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a3a8c, #5c77c6);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-size: 12px;
+    color: #c0c0d4;
+}
+
+.btn-preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a3a8c, #5c77c6);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* ── Demo Box ────────────────────────────────────────── */
+.demo-box {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.demo-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4a62a8;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.demo-before {
+    font-size: 14px;
+    color: #c0c0d4;
+    font-family: "Noto Sans JP", serif;
+}
+
+.demo-arrow {
+    color: #4a62a8;
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.demo-after {
+    font-size: 14px;
+    color: #fff;
+    font-family: "Noto Sans JP", serif;
+}
+
+.demo-after ruby rt {
+    font-size: 0.55em;
+    color: #5c77c6;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+.popup-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #555;
+    padding-top: 4px;
+}

@@ -1,0 +1,10 @@
+{
+    "appName": {
+        "message": "YomiMark — Instant Furigana for the Web",
+        "description": "The name of the extension"
+    },
+    "appDescription": {
+        "message": "Select Japanese text on any webpage and instantly add furigana (reading annotations) above kanji characters.",
+        "description": "The description of the extension"
+    }
+}
