@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YomiMark — Instant Furigana for the Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a3a8c;
+            --primary-light: #5c77c6;
+            --bg: #0f0f14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #e4e4eb;
+            --text-dim: #a0a0b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── Header ──────────────────────────────────────────── */
+        header {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 28px;
+            box-shadow: 0 10px 20px rgba(42, 58, 140, 0.3);
+        }
+
+        /* ── Hero ────────────────────────────────────────────── */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(to bottom, #fff, #a0a0b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 15px 30px rgba(42, 58, 140, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(42, 58, 140, 0.5);
+        }
+
+        /* ── Features ────────────────────────────────────────── */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* ── Demo Mockup ─────────────────────────────────────── */
+        .demo-canvas {
+            max-width: 800px;
+            margin: 0 auto 100px;
+            background: #1a1a24;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .japanese-text {
+            font-family: 'Noto Sans JP', serif;
+            font-size: 1.5rem;
+            line-height: 2.5;
+        }
+
+        ruby rt {
+            color: var(--primary-light);
+            font-weight: 400;
+            font-size: 0.5em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-box">読</div>
+            <div style="font-weight: 800; font-size: 20px; letter-spacing: -0.5px;">YomiMark</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating">
+            <div style="font-size: 3rem; margin-bottom: 20px;">📖</div>
+        </div>
+        <h1>Read Japanese with Confidence.</h1>
+        <p class="hero-desc">The smartest Chrome extension to instantly add Furigana to any Japanese text. Pure power,
+            zero clutter.</p>
+        <a href="https://chrome.google.com/webstore" class="cta-button">Add to Chrome — It's Free</a>
+    </section>
+
+    <section class="demo-canvas">
+        <div class="japanese-text">
+            <ruby>高市<rt>たかいち</rt></ruby><ruby>総理<rt>そうり</rt></ruby><ruby>大臣<rt>だいじん</rt></ruby>は、<ruby>衆参<rt>しゅうさん</rt>
+                </ruby><ruby>両院<rt>りょういん</rt></ruby>の<ruby>本会議<rt>ほんかいぎ</rt></ruby>で<ruby>行<rt>おこな</rt>
+                </ruby>われた<ruby>総理<rt>そうり</rt></ruby><ruby>大臣<rt>だいじん</rt></ruby><ruby>指名<rt>しめい</rt></ruby><ruby>選挙<rt>
+                    せんきょ</rt></ruby>で、<ruby>第<rt>だい</rt></ruby>105<ruby>代<rt>だい</rt></ruby>の<ruby>総理<rt>そうり</rt>
+                </ruby><ruby>大臣<rt>だいじん</rt></ruby>に<ruby>選出<rt>せんしゅつ</rt></ruby>されました。
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Annotation</h3>
+            <p>Select any word or Japanese text, click the "読" button, and see readings appear instantly above the
+                characters.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Privacy First</h3>
+            <p>All morphological analysis is done locally in your browser. Your data never leaves your device.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Quiet & Minimal</h3>
+            <p>No distractions. No whole-page clutter. Only shows up when you need it, staying true to your browsing
+                experience.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Developed with ❤️ by Toshiki.Tech Lab.</p>
+        <p style="margin-top: 10px;"><a href="https://github.com/toshiki-tech/yomi-mark"
+                style="color: var(--primary-light); text-decoration: none;">View on GitHub</a></p>
+    </footer>
+</body>
+
+</html>
