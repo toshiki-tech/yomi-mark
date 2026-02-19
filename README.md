@@ -35,4 +35,4 @@ YomiMark 是一个简洁高效的 Chrome 浏览器扩展，致力于帮助日语
 
 ## 开发团队
 
-Developed with ❤️ by **Toshiki Tech Lab**.
+Developed with ❤️ by **Toshiki.Tech Lab**.

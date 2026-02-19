@@ -121,8 +121,8 @@ body {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #4a62a8;
-    box-shadow: 0 0 6px rgba(74, 98, 168, 0.5);
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
     flex-shrink: 0;
 }
 
