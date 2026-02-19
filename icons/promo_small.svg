@@ -1,0 +1,23 @@
+<svg width="440" height="280" viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="440" height="280" fill="#0F0F14"/>
+  <defs>
+    <radialGradient id="bgGrad" cx="100%" cy="0%" r="100%" fx="100%" fy="0%">
+      <stop offset="0%" style="stop-color:#2a3a8c;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#0F0F14;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="440" height="280" fill="url(#bgGrad)"/>
+  
+  <!-- Logo Section -->
+  <g transform="translate(40, 75)">
+    <rect width="130" height="130" rx="28" fill="#2a3a8c"/>
+    <text x="65" y="85" text-anchor="middle" fill="white" font-family="sans-serif" font-weight="800" font-size="80">読</text>
+  </g>
+
+  <!-- Text Section -->
+  <text x="200" y="130" fill="white" font-family="sans-serif" font-weight="700" font-size="36">YomiMark</text>
+  <text x="200" y="170" fill="#A0A0B8" font-family="sans-serif" font-weight="400" font-size="18">Instant Furigana for Web</text>
+  
+  <!-- Accent Line -->
+  <rect x="200" y="145" width="40" height="4" rx="2" fill="#5C77C6"/>
+</svg>
