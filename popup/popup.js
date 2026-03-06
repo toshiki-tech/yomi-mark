@@ -21,6 +21,10 @@
         if (result.yomimarkRubyColor) {
             colorPicker.value = result.yomimarkRubyColor;
             if (demoRubyText) demoRubyText.style.color = result.yomimarkRubyColor;
+        } else {
+            // Use theme-aware defaults
+            const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            colorPicker.value = isDark ? "#38bdf8" : "#4a62a8";
         }
     });
 

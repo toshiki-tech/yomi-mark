@@ -28,6 +28,22 @@
     });
   }
 
+  // ── Load Gairaigo Dictionary ────────────────────────────────────────
+  let gairaigoDict = {};
+  function loadGairaigoDict() {
+    const url = chrome.runtime.getURL("dict/gairaigo.json");
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        gairaigoDict = data;
+        console.log("[YomiMark] Gairaigo dictionary loaded");
+      })
+      .catch((err) => {
+        console.error("[YomiMark] Failed to load gairaigo dictionary:", err);
+      });
+  }
+  loadGairaigoDict();
+
   // ── Initialize kuromoji tokenizer ──────────────────────────────────
   function initTokenizer() {
     if (tokenizer || tokenizerLoading) return Promise.resolve(tokenizer);
@@ -58,7 +74,19 @@
       const surface = token.surface_form;
       const reading = token.reading;
 
-      // If token contains kanji and has a reading, add ruby annotation
+      // Logic for Gairaigo (Loanwords)
+      const isKatakana = /^[\u30A0-\u30FF]+$/.test(surface);
+      if (isKatakana && gairaigoDict[surface]) {
+        html +=
+          '<ruby class="yomimark-ruby">' +
+          escapeHTML(surface) +
+          "<rp>(</rp><rt>" +
+          escapeHTML(gairaigoDict[surface]) +
+          "</rt><rp>)</rp></ruby>";
+        continue;
+      }
+
+      // Logic for Kanji with Furigana
       if (containsKanji(surface) && reading) {
         const hiragana = katakanaToHiragana(reading);
         // Only add ruby if reading differs from surface (avoid annotating pure kana)
@@ -201,10 +229,13 @@
 
   // ── Extension State & Styling Management ──────────────────────────
   function updateRubyStyles(color) {
-    if (!color) color = "#4a62a8";
-    document.documentElement.style.setProperty("--yomimark-ruby-color", color);
-    // For hover, we use the same color. The CSS uses a brightness filter for hover effect.
-    document.documentElement.style.setProperty("--yomimark-ruby-hover-color", color);
+    if (color) {
+      document.documentElement.style.setProperty("--yomimark-ruby-color", color);
+      document.documentElement.style.setProperty("--yomimark-ruby-hover-color", color);
+    } else {
+      document.documentElement.style.removeProperty("--yomimark-ruby-color");
+      document.documentElement.style.removeProperty("--yomimark-ruby-hover-color");
+    }
   }
 
   function setEnabled(state) {

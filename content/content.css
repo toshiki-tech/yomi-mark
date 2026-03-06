@@ -61,6 +61,15 @@
 }
 
 /* ── YomiMark Ruby Annotations ─────────────────────────── */
+:root {
+  --yomimark-ruby-color-default: #4a62a8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --yomimark-ruby-color-default: #38bdf8;
+  }
+}
 
 .yomimark-ruby {
   ruby-align: center;
@@ -68,7 +77,7 @@
 
 .yomimark-ruby rt {
   font-size: 0.55em;
-  color: var(--yomimark-ruby-color, #4a62a8);
+  color: var(--yomimark-ruby-color, var(--yomimark-ruby-color-default));
   font-weight: 400;
   font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   letter-spacing: 0.02em;
@@ -80,6 +89,6 @@
 
 /* Subtle highlight on annotated text for discoverability */
 .yomimark-annotated:hover .yomimark-ruby rt {
-  color: var(--yomimark-ruby-hover-color, #2a3a8c);
+  color: var(--yomimark-ruby-hover-color, var(--yomimark-ruby-color, var(--yomimark-ruby-color-default)));
   filter: brightness(0.8);
 }
