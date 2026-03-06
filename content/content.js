@@ -80,7 +80,7 @@
         html +=
           '<ruby class="yomimark-ruby">' +
           escapeHTML(surface) +
-          "<rp>(</rp><rt>" +
+          "<rp>(</rp><rt class=\"yomimark-rt-gairaigo\">" +
           escapeHTML(gairaigoDict[surface]) +
           "</rt><rp>)</rp></ruby>";
         continue;
@@ -94,7 +94,7 @@
           html +=
             '<ruby class="yomimark-ruby">' +
             escapeHTML(surface) +
-            "<rp>(</rp><rt>" +
+            "<rp>(</rp><rt class=\"yomimark-rt-kanji\">" +
             escapeHTML(hiragana) +
             "</rt><rp>)</rp></ruby>";
         } else {
@@ -228,13 +228,17 @@
   }
 
   // ── Extension State & Styling Management ──────────────────────────
-  function updateRubyStyles(color) {
-    if (color) {
-      document.documentElement.style.setProperty("--yomimark-ruby-color", color);
-      document.documentElement.style.setProperty("--yomimark-ruby-hover-color", color);
+  function updateRubyStyles(kanjiColor, gairaigoColor) {
+    if (kanjiColor) {
+      document.documentElement.style.setProperty("--yomimark-ruby-color", kanjiColor);
     } else {
       document.documentElement.style.removeProperty("--yomimark-ruby-color");
-      document.documentElement.style.removeProperty("--yomimark-ruby-hover-color");
+    }
+
+    if (gairaigoColor) {
+      document.documentElement.style.setProperty("--yomimark-gairaigo-color", gairaigoColor);
+    } else {
+      document.documentElement.style.removeProperty("--yomimark-gairaigo-color");
     }
   }
 
@@ -256,18 +260,20 @@
   });
 
   // Load initial state and load styles
-  chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor"], function (result) {
+  chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor", "yomimarkGairaigoColor"], function (result) {
     if (result.yomimarkEnabled === false) {
       enabled = false;
     }
-    updateRubyStyles(result.yomimarkRubyColor);
+    updateRubyStyles(result.yomimarkRubyColor, result.yomimarkGairaigoColor);
   });
 
   // Listen for storage changes (updates color in real-time across tabs)
   chrome.storage.onChanged.addListener(function (changes, area) {
     if (area === "local") {
-      if (changes.yomimarkRubyColor) {
-        updateRubyStyles(changes.yomimarkRubyColor.newValue);
+      if (changes.yomimarkRubyColor || changes.yomimarkGairaigoColor) {
+        chrome.storage.local.get(["yomimarkRubyColor", "yomimarkGairaigoColor"], function (res) {
+          updateRubyStyles(res.yomimarkRubyColor, res.yomimarkGairaigoColor);
+        });
       }
       if (changes.yomimarkEnabled) {
         setEnabled(changes.yomimarkEnabled.newValue);

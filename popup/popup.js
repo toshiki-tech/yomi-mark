@@ -10,29 +10,41 @@
     const statusText = document.getElementById("status-text");
 
     const colorPicker = document.getElementById("rt-color");
+    const gairaigoColorPicker = document.getElementById("gairaigo-color");
     const demoRubyText = document.querySelector(".demo-after ruby rt");
 
     // Load saved state
-    chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor"], function (result) {
+    chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor", "yomimarkGairaigoColor"], function (result) {
         const isEnabled = result.yomimarkEnabled !== false; // default true
         toggle.checked = isEnabled;
         updateStatusUI(isEnabled);
+
+        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
         if (result.yomimarkRubyColor) {
             colorPicker.value = result.yomimarkRubyColor;
             if (demoRubyText) demoRubyText.style.color = result.yomimarkRubyColor;
         } else {
-            // Use theme-aware defaults
-            const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
             colorPicker.value = isDark ? "#38bdf8" : "#4a62a8";
+        }
+
+        if (result.yomimarkGairaigoColor) {
+            gairaigoColorPicker.value = result.yomimarkGairaigoColor;
+        } else {
+            gairaigoColorPicker.value = isDark ? "#34d399" : "#10b981";
         }
     });
 
-    // Color picker handler
+    // Color picker handlers
     colorPicker.addEventListener("input", function () {
         const color = colorPicker.value;
         chrome.storage.local.set({ yomimarkRubyColor: color });
         if (demoRubyText) demoRubyText.style.color = color;
+    });
+
+    gairaigoColorPicker.addEventListener("input", function () {
+        const color = gairaigoColorPicker.value;
+        chrome.storage.local.set({ yomimarkGairaigoColor: color });
     });
 
     // Toggle handler
