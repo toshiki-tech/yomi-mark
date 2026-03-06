@@ -221,7 +221,17 @@ body {
 
 .demo-after ruby rt {
     font-size: 0.55em;
+    line-height: 1;
+}
+
+.demo-after .yomimark-rt-kanji {
     color: #5c77c6;
+}
+
+.demo-after .yomimark-rt-gairaigo {
+    color: #10b981;
+    font-weight: 500;
+    font-style: italic;
 }
 
 /* ── Settings Section ────────────────────────────────── */

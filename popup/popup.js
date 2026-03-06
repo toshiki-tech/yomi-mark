@@ -11,7 +11,8 @@
 
     const colorPicker = document.getElementById("rt-color");
     const gairaigoColorPicker = document.getElementById("gairaigo-color");
-    const demoRubyText = document.querySelector(".demo-after ruby rt");
+    const demoRtKanji = document.querySelectorAll(".demo-after .yomimark-rt-kanji");
+    const demoRtGairaigo = document.querySelectorAll(".demo-after .yomimark-rt-gairaigo");
 
     // Load saved state
     chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor", "yomimarkGairaigoColor"], function (result) {
@@ -23,13 +24,14 @@
 
         if (result.yomimarkRubyColor) {
             colorPicker.value = result.yomimarkRubyColor;
-            if (demoRubyText) demoRubyText.style.color = result.yomimarkRubyColor;
+            demoRtKanji.forEach(el => el.style.color = result.yomimarkRubyColor);
         } else {
             colorPicker.value = isDark ? "#38bdf8" : "#4a62a8";
         }
 
         if (result.yomimarkGairaigoColor) {
             gairaigoColorPicker.value = result.yomimarkGairaigoColor;
+            demoRtGairaigo.forEach(el => el.style.color = result.yomimarkGairaigoColor);
         } else {
             gairaigoColorPicker.value = isDark ? "#34d399" : "#10b981";
         }
@@ -39,12 +41,13 @@
     colorPicker.addEventListener("input", function () {
         const color = colorPicker.value;
         chrome.storage.local.set({ yomimarkRubyColor: color });
-        if (demoRubyText) demoRubyText.style.color = color;
+        demoRtKanji.forEach(el => el.style.color = color);
     });
 
     gairaigoColorPicker.addEventListener("input", function () {
         const color = gairaigoColorPicker.value;
         chrome.storage.local.set({ yomimarkGairaigoColor: color });
+        demoRtGairaigo.forEach(el => el.style.color = color);
     });
 
     // Toggle handler
