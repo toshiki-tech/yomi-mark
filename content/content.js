@@ -199,7 +199,14 @@
     }
   }
 
-  // ── Extension State Management ─────────────────────────────────────
+  // ── Extension State & Styling Management ──────────────────────────
+  function updateRubyStyles(color) {
+    if (!color) color = "#4a62a8";
+    document.documentElement.style.setProperty("--yomimark-ruby-color", color);
+    // For hover, we use the same color. The CSS uses a brightness filter for hover effect.
+    document.documentElement.style.setProperty("--yomimark-ruby-hover-color", color);
+  }
+
   function setEnabled(state) {
     enabled = state;
     if (!enabled) {
@@ -217,10 +224,23 @@
     }
   });
 
-  // Load initial state from storage
-  chrome.storage.local.get(["yomimarkEnabled"], function (result) {
+  // Load initial state and load styles
+  chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor"], function (result) {
     if (result.yomimarkEnabled === false) {
       enabled = false;
+    }
+    updateRubyStyles(result.yomimarkRubyColor);
+  });
+
+  // Listen for storage changes (updates color in real-time across tabs)
+  chrome.storage.onChanged.addListener(function (changes, area) {
+    if (area === "local") {
+      if (changes.yomimarkRubyColor) {
+        updateRubyStyles(changes.yomimarkRubyColor.newValue);
+      }
+      if (changes.yomimarkEnabled) {
+        setEnabled(changes.yomimarkEnabled.newValue);
+      }
     }
   });
 

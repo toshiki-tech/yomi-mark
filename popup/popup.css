@@ -224,6 +224,46 @@ body {
     color: #5c77c6;
 }
 
+/* ── Settings Section ────────────────────────────────── */
+.settings-section {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.setting-item label {
+    font-size: 13px;
+    color: #c0c0d4;
+}
+
+.setting-item input[type="color"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.setting-item input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.setting-item input[type="color"]::-webkit-color-swatch {
+    border: 1px solid #2a2a3a;
+    border-radius: 4px;
+}
+
 /* ── Footer ──────────────────────────────────────────── */
 .popup-footer {
     display: flex;

@@ -9,11 +9,26 @@
     const statusBar = document.getElementById("status-bar");
     const statusText = document.getElementById("status-text");
 
+    const colorPicker = document.getElementById("rt-color");
+    const demoRubyText = document.querySelector(".demo-after ruby rt");
+
     // Load saved state
-    chrome.storage.local.get(["yomimarkEnabled"], function (result) {
+    chrome.storage.local.get(["yomimarkEnabled", "yomimarkRubyColor"], function (result) {
         const isEnabled = result.yomimarkEnabled !== false; // default true
         toggle.checked = isEnabled;
         updateStatusUI(isEnabled);
+
+        if (result.yomimarkRubyColor) {
+            colorPicker.value = result.yomimarkRubyColor;
+            if (demoRubyText) demoRubyText.style.color = result.yomimarkRubyColor;
+        }
+    });
+
+    // Color picker handler
+    colorPicker.addEventListener("input", function () {
+        const color = colorPicker.value;
+        chrome.storage.local.set({ yomimarkRubyColor: color });
+        if (demoRubyText) demoRubyText.style.color = color;
     });
 
     // Toggle handler
