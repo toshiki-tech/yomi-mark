@@ -4,7 +4,7 @@
         "description": "The name of the extension"
     },
     "appDescription": {
-        "message": "Select Japanese text on any webpage and instantly add furigana (reading annotations) above kanji characters.",
+        "message": "Select Japanese text on any webpage to instantly add furigana for Kanji and English annotations for Katakana loanwords.",
         "description": "The description of the extension"
     }
 }

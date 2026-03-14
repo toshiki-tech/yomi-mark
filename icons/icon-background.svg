@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 模仿图片中的径向渐变效果，高光在右上角 -->
+    <radialGradient id="iconGrad" cx="70%" cy="30%" r="90%" fx="70%" fy="30%">
+      <stop offset="0%" style="stop-color:#5c77c6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a3a8c;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- 背景填充 -->
+  <rect width="128" height="128" fill="url(#iconGrad)"/>
+</svg>
