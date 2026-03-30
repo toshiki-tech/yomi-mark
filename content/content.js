@@ -69,27 +69,62 @@
   // ── Build ruby HTML from tokens ────────────────────────────────────
   function buildRubyHTML(tokens) {
     let html = "";
-    for (let i = 0; i < tokens.length; i++) {
-      const token = tokens[i];
-      const surface = token.surface_form;
-      const reading = token.reading;
+    let i = 0;
 
-      // Logic for Gairaigo (Loanwords)
-      const isKatakana = /^[\u30A0-\u30FF]+$/.test(surface);
-      if (isKatakana && gairaigoDict[surface]) {
-        html +=
-          '<ruby class="yomimark-ruby">' +
-          escapeHTML(surface) +
-          "<rp>(</rp><rt class=\"yomimark-rt-gairaigo\">" +
-          escapeHTML(gairaigoDict[surface]) +
-          "</rt><rp>)</rp></ruby>";
+    while (i < tokens.length) {
+      const token = tokens[i];
+      if (!token) { i++; continue; }
+
+      const surface = token.surface_form || "";
+      const reading = token.reading || "";
+
+      // 1. Logic for Katakana Sequences (Dictionary-driven Segmenting)
+      if (/^[\u30A0-\u30FF]+$/.test(surface)) {
+        // Collect all immediately consecutive Katakana tokens into one long string
+        let fullKatakanaStr = "";
+        let j = i;
+        while (j < tokens.length && /^[\u30A0-\u30FF]+$/.test(tokens[j].surface_form)) {
+          fullKatakanaStr += tokens[j].surface_form;
+          j++;
+        }
+        // Advance the outer loop index to the end of this block
+        i = j;
+
+        // Perform Forward Maximum Matching (FMM) on this combined string
+        let cursor = 0;
+        const maxMatchLen = 20; // Optimization: words are rarely longer than 20 chars
+
+        while (cursor < fullKatakanaStr.length) {
+          let matched = false;
+          // Try matching from the longest possible substring down to 1 char
+          for (let len = Math.min(maxMatchLen, fullKatakanaStr.length - cursor); len > 0; len--) {
+            const subStr = fullKatakanaStr.substring(cursor, cursor + len);
+            if (gairaigoDict && gairaigoDict[subStr]) {
+              html +=
+                '<ruby class="yomimark-ruby">' +
+                escapeHTML(subStr) +
+                "<rp>(</rp><rt class=\"yomimark-rt-gairaigo\">" +
+                escapeHTML(gairaigoDict[subStr]) +
+                "</rt><rp>)</rp></ruby>";
+              cursor += len;
+              matched = true;
+              break;
+            }
+          }
+
+          if (!matched) {
+            // If no match found for current cursor position, output one character and move on
+            html += escapeHTML(fullKatakanaStr[cursor]);
+            cursor++;
+          }
+        }
+        // Important: we handled the Katakana block, do not fall through to Kanji logic
         continue;
       }
 
-      // Logic for Kanji with Furigana
+      // 2. Logic for Kanji with Furigana
       if (containsKanji(surface) && reading) {
         const hiragana = katakanaToHiragana(reading);
-        // Only add ruby if reading differs from surface (avoid annotating pure kana)
         if (hiragana !== surface) {
           html +=
             '<ruby class="yomimark-ruby">' +
@@ -103,6 +138,7 @@
       } else {
         html += escapeHTML(surface);
       }
+      i++;
     }
     return html;
   }
